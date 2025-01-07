@@ -3,6 +3,7 @@
 require_once("../../../vendor/autoload.php");
 use App\Controllers\Auth\AuthController;
 
+setcookie("color", "black" , time() + 2 , "/");
 
 
 if(isset($_POST["submit"]))
@@ -11,6 +12,8 @@ if(isset($_POST["submit"]))
     if(empty($_POST["email"]) && empty($_POST["password"]))
     {
         echo "email or password is empty";
+
+        
     }
     else{
         $email = $_POST["email"];
@@ -20,6 +23,7 @@ if(isset($_POST["submit"]))
         $authController->login($email, $password);
 
     }
+  
 }
 
 

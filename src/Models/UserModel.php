@@ -15,6 +15,8 @@ class UserModel{
     }
 
     public function findUserByEmailAndPassword($email, $password){
+
+        session_start();
         $query = "SELECT users.id , users.email , users.password , role.id as role_id , role.title as `role`
         FROM users join role on role.id = users.role_id where users.email = :email and users.password = :password";        
    
@@ -28,6 +30,9 @@ class UserModel{
          return null;
          }
          else{
+            $_SESSION["id"] = $row["id"];
+            $_SESSION["role"] = $row["role"];
+
             $role = new Role($row["role_id"], $row["role"]);
             return new User($row['id'],$row["email"],$role,$row["password"]);
          }
